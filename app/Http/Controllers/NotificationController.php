@@ -30,16 +30,14 @@ class NotificationController extends Controller
         $notifications = $this->api->be(auth()->user())->get('/api/notifications/'.$type);
         if ($type === 'archive') {
             $page = '';
-            $button = 'Notifications';
             $bg = 'maroon';
         }
         else {
             $page = 'archive';
-            $button = 'Archive';
             $bg = 'blue';
         }
 
-        return view('notifications.list', compact(['notifications', 'page', 'button', 'bg', "type"]));
+        return view('notifications.list', compact(['notifications', 'page', 'bg', "type"]));
     }
 
     /**

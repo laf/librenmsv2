@@ -5,8 +5,8 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <a class="btn btn-primary margin-bottom" href="{{ url('notifications/'.$page) }}">{{ $button }}</a>
-        <div class="pull-right"><a class="btn btn-success margin-bottom" href="#" id="show-notification">New notification</a></div>
+        <a class="btn btn-primary margin-bottom" href="{{ url('notifications/'.$page) }}">@if ($type === 'archive') {{ trans('notifications.btn.notifications') }} @else {{ trans('notifications.btn.archive') }} @endif</a>
+        <div class="pull-right"><a class="btn btn-success margin-bottom" href="#" id="show-notification">{{ trans('notifications.btn.new') }}</a></div>
     </div>
 </div>
 <div class="row" id="notification-form">
@@ -14,22 +14,22 @@
         <form class="form-horizontal" id="new-notification-form">
             <input type="hidden" name="_method" value="put" />
             <div class="form-group">
-                <label for="title" class="col-sm-2 control-label">Title</label>
+                <label for="title" class="col-sm-2 control-label">{{ trans('notifications.label.title') }}</label>
                 <div class="col-sm-10">
-                    <input class="form-control" id="title" name="title" placeholder="Notification title">
+                    <input class="form-control" id="title" name="title" placeholder="{{ trans('notifications.label.title') }}">
                     <div class="text-red form-error"><small></small></div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="notification" class="col-sm-2 control-label">Notification</label>
+                <label for="notification" class="col-sm-2 control-label">{{ trans('notifications.label.message') }}</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" row="3" id="body" name="body" placeholder="Message"></textarea>
+                    <textarea class="form-control" row="3" id="body" name="body" placeholder="{{ trans('notifications.label.message') }}"></textarea>
                     <div class="text-red form-error"><small></small></div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary" id="create-notification">Create notification</button>
+                    <button type="submit" class="btn btn-primary" id="create-notification">{{ trans('notifications.btn.create') }}</button>
                 </div>
             </div>
         </form>
@@ -49,14 +49,14 @@
                     </div>
                     <div class="timeline-footer">
                         @if ($type === 'archive')
-                        <a class="btn btn-danger btn-xs notification" id="read" data-id="{{ $notification->notifications_id }}" data-action="unread"><i class="fa fa-eye"></i> Mark as unread</a>
+                        <a class="btn btn-danger btn-xs notification" id="read" data-id="{{ $notification->notifications_id }}" data-action="unread"><i class="fa fa-eye"></i> {{ trans('notifications.btn.markunread') }}</a>
                         @else
                             @if ($notification->key === 'sticky')
-                            <a class="btn btn-primary btn-xs notification" id="unsticky" data-id="{{ $notification->notifications_id }}" data-action="unsticky"><i class="fa fa-bell-o"></i> Un-Sticky</a>
+                            <a class="btn btn-primary btn-xs notification" id="unsticky" data-id="{{ $notification->notifications_id }}" data-action="unsticky"><i class="fa fa-bell-o"></i> {{ trans('notifications.btn.unsticky') }}</a>
                             @else
-                            <a class="btn btn-primary btn-xs notification" id="sticky" data-id="{{ $notification->notifications_id }}" data-action="sticky"><i class="fa fa-bell-o"></i> Sticky</a>
+                            <a class="btn btn-primary btn-xs notification" id="sticky" data-id="{{ $notification->notifications_id }}" data-action="sticky"><i class="fa fa-bell-o"></i> {{ trans('notifications.btn.sticky') }}</a>
                             @endif
-                        <a class="btn btn-danger btn-xs notification" id="read" data-id="{{ $notification->notifications_id }}" data-action="read"><i class="fa fa-eye"></i> Mark as read</a>
+                        <a class="btn btn-danger btn-xs notification" id="read" data-id="{{ $notification->notifications_id }}" data-action="read"><i class="fa fa-eye"></i> {{ trans('notifications.btn.markread') }}</a>
                         @endif
                         <div class="pull-right">
                             <p class="text-muted">Source -
@@ -64,7 +64,7 @@
                                     @if ($notification->username !== Auth::user()->username)
                                     {{ $notification->username }}
                                     @else
-                                    You!
+                                    {{ trans('notifications.text.you') }}
                                     @endif
                                 @else
                                 {{ $notification->source }}
@@ -80,7 +80,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <a class="btn btn-primary margin-bottom" href="{{ url('notifications/'.$page) }}">{{ $button }}</a>
+        <a class="btn btn-primary margin-bottom" href="{{ url('notifications/'.$page) }}">@if ($type === 'archive') {{ trans('notifications.btn.notifications') }} @else {{ trans('notifications.btn.archive') }} @endif</a>
     </div>
 </div>
 @endsection

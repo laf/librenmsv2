@@ -77,7 +77,7 @@
                                                 <!-- end notification -->
                                             </ul>
                                         </li>
-                                        <li class="footer"><a href="{{ url('/notifications') }}">View all</a></li>
+                                        <li class="footer"><a href="{{ url('/notifications') }}">{{ trans('notifications.text.all') }}</a></li>
                                     </ul>
                                 </li>
                                 <!-- User Account: style can be found in dropdown.less -->
